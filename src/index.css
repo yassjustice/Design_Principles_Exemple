@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', 'Avenir', 'Helvetica', 'Arial', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a5b4fc 0%, #fbc2eb 100%);
+  color: #222;
+}
+
+/* Custom gradient text utility for use in JSX: className="bg-gradient-to-r from-primary via-accent to-pink-500 bg-clip-text text-transparent" */
+
+/* Glassmorphism card utility for use in JSX: className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl border border-white/30" */
+
+/* Button utility for use in JSX: className="px-8 py-4 rounded-2xl font-semibold shadow-lg text-white text-lg transition-transform duration-200 focus:outline-none focus:ring-4 focus:ring-primary hover:scale-105 hover:brightness-110 active:scale-95 bg-gradient-to-r from-primary to-accent" */
+
+/* Animations should be handled via Tailwind config and utility classes in JSX */
+
+/* Accessibility: focus ring for all interactive elements is handled by Tailwind focus utilities */
+
+/* Remove legacy styles */
