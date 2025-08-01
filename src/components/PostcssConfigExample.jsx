@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CodeBox from './CodeBox';
 
 const code = `export default {
   plugins: {
@@ -9,30 +10,34 @@ const code = `export default {
 
 const PostcssConfigExample = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
 
   return (
-    <div className="border rounded-lg p-4 mb-4">
-      <button className="text-blue-500 mb-2" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? 'Hide' : 'Show'} postcss.config.js Example
+    <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-slate-200/50 hover:shadow-2xl transition-all duration-300">
+      <button 
+        className="flex items-center justify-between w-full text-left text-lg font-semibold text-slate-800 hover:text-blue-600 transition-colors duration-200" 
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="flex items-center gap-3">
+          ⚙️ postcss.config.js Configuration
+        </span>
+        <svg
+          className={`w-5 h-5 transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+        </svg>
       </button>
+      
       {isOpen && (
-        <div>
-          <pre className="mt-2 bg-gray-100 p-2 rounded overflow-x-auto text-sm">
+        <div className="mt-6">
+          <CodeBox 
+            language="javascript" 
+            title="postcss.config.js - PostCSS Plugin Configuration"
+            theme="dark"
+          >
             {code}
-          </pre>
-          <button className="flex items-center bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200 mt-2" onClick={copyToClipboard}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V3a1 1 0 011-1h6a1 1 0 011 1v8m-6 0h6m-6 0v8a1 1 0 001 1h6a1 1 0 001-1v-8" />
-            </svg>
-            {copied ? 'Copied!' : 'Copy Code'}
-          </button>
+          </CodeBox>
         </div>
       )}
     </div>

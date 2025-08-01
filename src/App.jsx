@@ -7,6 +7,7 @@ import PostcssConfigExample from './components/PostcssConfigExample';
 import TailwindConfigExample from './components/TailwindConfigExample';
 import ViteConfigExample from './components/ViteConfigExample';
 import TailwindReportPage from './components/TailwindReportPage';
+import TailwindComprehensiveReport from './components/TailwindComprehensiveReport';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import DesignPrinciplesPDF from './components/DesignPrinciplesPDF';
 import packageJsonCode from './assets/package.txt?raw';
@@ -134,6 +135,16 @@ function App() {
               }`}
             >
               ⚡ Tailwind v4+ Setup
+            </button>
+            <button
+              onClick={() => setActiveTab('comprehensive')}
+              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                activeTab === 'comprehensive'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+              }`}
+            >
+              📋 Comprehensive Report
             </button>
           </div>
         </div>
@@ -403,6 +414,11 @@ function App() {
       {/* Tailwind Report Tab */}
       {activeTab === 'tailwind' && (
         <TailwindReportPage />
+      )}
+
+      {/* Comprehensive Report Tab */}
+      {activeTab === 'comprehensive' && (
+        <TailwindComprehensiveReport />
       )}
     </main>
   );
