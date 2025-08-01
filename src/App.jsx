@@ -6,6 +6,7 @@ import PackageJsonExample from './components/PackageJsonExample';
 import PostcssConfigExample from './components/PostcssConfigExample';
 import TailwindConfigExample from './components/TailwindConfigExample';
 import ViteConfigExample from './components/ViteConfigExample';
+import TailwindReportPage from './components/TailwindReportPage';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import DesignPrinciplesPDF from './components/DesignPrinciplesPDF';
 import packageJsonCode from './assets/package.txt?raw';
@@ -71,6 +72,7 @@ function App() {
   const [exporting, setExporting] = useState(false);
   const [exportError, setExportError] = useState(null);
   const [exportSuccess, setExportSuccess] = useState(false);
+  const [activeTab, setActiveTab] = useState('principles');
   const [showConfig, setShowConfig] = useState({
     packageJson: false,
     postcssConfig: false,
@@ -109,9 +111,39 @@ function App() {
 
   return (
     <main className="max-w-7xl mx-auto min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 font-sans">
-      <div id="export-content">
-      {/* Hero Section */}
-      <section className="py-20 px-6 md:px-8 text-center">
+      {/* Navigation Tabs */}
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-white/50 shadow-lg">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex space-x-8">
+            <button
+              onClick={() => setActiveTab('principles')}
+              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                activeTab === 'principles'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+              }`}
+            >
+              🎨 Design Principles
+            </button>
+            <button
+              onClick={() => setActiveTab('tailwind')}
+              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                activeTab === 'tailwind'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+              }`}
+            >
+              ⚡ Tailwind v4+ Setup
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Tab Content */}
+      {activeTab === 'principles' && (
+        <div id="export-content">
+          {/* Hero Section */}
+          <section className="py-20 px-6 md:px-8 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
             Premium Design Principles
@@ -366,6 +398,12 @@ function App() {
         </div>
       </footer>
       </div>
+      )}
+
+      {/* Tailwind Report Tab */}
+      {activeTab === 'tailwind' && (
+        <TailwindReportPage />
+      )}
     </main>
   );
 }
